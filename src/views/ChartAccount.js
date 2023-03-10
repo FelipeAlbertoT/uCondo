@@ -1,16 +1,19 @@
 import { Icon } from '@rneui/base';
-import { ListItem } from '@rneui/themed';
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import { ListItem, Dialog } from '@rneui/themed';
+import { useState } from 'react';
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import chartAccounts from "../data/chartAccounts";
 
 export default function ChartAccountScreen({ navigation }) {
+  const [showDialog, setShowDialog] = useState(false)
+
   const getChartAccountName = ({ item }) => {
     return (
       <ListItem containerStyle={styles.listItem}>
         <ListItem.Content style={styles.listContent}>
-          <ListItem.Title style={{ color: 'red' }}>{item.id} - {item.name}</ListItem.Title>
+          <ListItem.Title style={[styles.listTitle, item.type == 1 ? styles.listTitleIncome : styles.listTitleExpense]}>{item.id} - {item.name}</ListItem.Title>
         </ListItem.Content>
-        <Icon name="trash-can-outline" type="material-community" color="grey" />
+        <Icon name="trash" type="feather" color="#C4C4D1" onPress={() => setShowDialog(true)} />
       </ListItem>
     )
   }
@@ -21,6 +24,31 @@ export default function ChartAccountScreen({ navigation }) {
         data={chartAccounts}
         renderItem={getChartAccountName}
       />
+
+      <Dialog
+        overlayStyle={styles.dialog}
+        isVisible={showDialog}
+        onBackdropPress={() => setShowDialog(false)}
+      >
+        <Icon style={{ paddingBottom: 21 }} size={40} name="trash" type="feather" color="#FF6680" />
+        <View style={{alignItems: 'center', marginBottom: 23}}>
+          <Text>Deseja excluir a conta</Text>
+          <Text>1.1 - Taxa condominial?</Text>
+        </View>
+        <Dialog.Actions>
+          <Dialog.Button
+            titleStyle={styles.btnPos}
+            buttonStyle={styles.btnPos}
+            type="solid"
+            title="Com certeza"
+            onPress={() => console.log('Secondary Action Clicked!')} />
+          <Dialog.Button
+            titleStyle={styles.btnNeg}
+            type="clear"
+            title="Não!"
+            onPress={() => console.log('Primary Action Clicked!')} />
+        </Dialog.Actions>
+      </Dialog>
     </View>
   );
 }
@@ -41,9 +69,32 @@ const styles = StyleSheet.create({
   listContent: {
     flex: 1
   },
-  header: {
-    color: '#FFF',
-    fontWeight: '700',
-    fontSize: 22
+  listTitle: {
+    fontWeight: 400,
+    fontSize: 15
   },
+  listTitleIncome: {
+    color: '#1BA803'
+  },
+  listTitleExpense: {
+    color: '#E28856'
+
+  },
+  dialog: {
+    backgroundColor: '#FFF',
+    borderRadius: 16
+  },
+  btnPos: {
+    color: '#FFF',
+    backgroundColor: '#FF6680',
+    borderRadius: 100,
+    paddingHorizontal: 12,
+    fontSize: 15,
+    fontWeight: 400,
+  },
+  btnNeg: {
+    color: '#FF6680',
+    fontSize: 15,
+    fontWeight: 400,
+  }
 });

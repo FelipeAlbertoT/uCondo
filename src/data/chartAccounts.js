@@ -2,79 +2,79 @@ export default [
   {
     id: '1',
     name: 'Receitas',
-    type: 'Receita',
+    type: '1',
     allowEntry: 'Não'
   },
   {
     id: '1.1',
     name: 'Taxa condominial',
-    type: 'Receita',
+    type: '1',
     allowEntry: 'Sim'
   },
   {
     id: '1.2',
     name: 'Reserva de dependência',
-    type: 'Receita',
+    type: '1',
     allowEntry: 'Sim'
   },
   {
     id: '1.3',
     name: 'Multas',
-    type: 'Receita',
+    type: '1',
     allowEntry: 'Sim'
   },
   {
     id: '2',
     name: 'Despesas',
-    type: 'Despesa',
+    type: '2',
     allowEntry: 'Não'
   },
   {
     id: '2.1',
     name: 'Com pessoal',
-    type: 'Despesa',
+    type: '2',
     allowEntry: 'Não'
   },
   {
     id: '2.1.1',
     name: 'Salário',
-    type: 'Despesa',
+    type: '2',
     allowEntry: 'Sim'
   },
   {
     id: '2.1.2',
     name: 'Adiantamento salarial',
-    type: 'Despesa',
+    type: '2',
     allowEntry: 'Sim'
   },
   {
     id: '2.1.3',
     name: 'Hora extra',
-    type: 'Despesa',
+    type: '2',
     allowEntry: 'Sim'
   },
   {
     id: '2.2',
     name: 'Mensais',
-    type: 'Despesa',
+    type: '2',
     allowEntry: 'Não'
   },
   {
     id: '2.2.1',
     name: 'Energia elétrica',
-    type: 'Despesa',
+    type: '2',
     allowEntry: 'Sim'
   },
   {
     id: '2.2.2',
     name: 'Água e esgoto',
-    type: 'Despesa',
+    type: '2',
     allowEntry: 'Sim'
   },
   {
     id: '2.2.3',
     name: 'Taxa de administração',
-    type: 'Despesa',
+    type: '2',
     allowEntry: 'Sim'
   }
 ]
