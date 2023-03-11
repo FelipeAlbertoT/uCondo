@@ -9,14 +9,33 @@ const defaultValues = { type: 1, allowEntry: 1 }
 export default function ChartAccountForm({ navigation, route }) {
   const { state, dispatch } = useContext(ChartAccountContext);
   const [chartAccount, setChartAccount] = useState(route.params ? route.params : defaultValues)
+  const [idError, setIdError] = useState(false)
+  const [nameError, setNameError] = useState(false)
 
   const saveChartAccount = () => {
-    dispatch({
-      type: 'createChartAccount',
-      payload: chartAccount
-    })
-    navigation.goBack()
+    let regex = /^([0-9]{1,3}\.)*[0-9]{1,3}$/
+    if(!chartAccount.id || !regex.test(chartAccount.id)) {
+      setIdError(true)
+    } 
+    if(!chartAccount.name) {
+      setNameError(true)
+    } 
+    if(chartAccount.id && chartAccount.name) {
+      dispatch({
+        type: 'createChartAccount',
+        payload: chartAccount
+      })
+      navigation.goBack()
+    }
   }
+
+  useEffect(() => {
+    setIdError(false)
+  }, [chartAccount.id]);
+
+  useEffect(() => {
+    setNameError(false)
+  }, [chartAccount.name]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -101,15 +120,20 @@ export default function ChartAccountForm({ navigation, route }) {
 
         <Text style={styles.fieldLabel}>Código</Text>
         <TextInput
-          style={styles.textInput}
-          onChangeText={id => { setChartAccount({ ...chartAccount, id }) }}
+          style={[styles.textInput, idError ? styles.textInputError : '']}
+          onChangeText={id => { 
+            setChartAccount({ ...chartAccount, id }) 
+          }}
           value={chartAccount.id}
         />
 
         <Text style={styles.fieldLabel}>Nome</Text>
         <TextInput
-          style={styles.textInput}
-          onChangeText={name => { setChartAccount({ ...chartAccount, name }) }}
+          style={[styles.textInput, nameError ? styles.textInputError : '']}
+          onChangeText={name => { 
+            setNameError(false)
+            setChartAccount({ ...chartAccount, name }) 
+          }}
           value={chartAccount.name}
         />
 
@@ -176,6 +200,10 @@ const styles = StyleSheet.create({
     fontFamily: 'rubik',
     fontSize: 15,
     fontWeight: '400',
+  },
+  textInputError: {
+    borderWidth: 1,
+    borderColor: '#FF6680',
   },
   pickerContainer: {
     backgroundColor: '#FFF',

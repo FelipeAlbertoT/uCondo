@@ -3,7 +3,7 @@ import chartAccounts from "../data/chartAccounts";
 import { storeChartAccounts } from "../storage/storage";
 
 const ChartAccountContext = createContext({})
-const initialState = { chartAccounts }
+const initialState = { chartAccounts: [] }
 
 const actions = {
     deleteChartAccount(state, id) {
