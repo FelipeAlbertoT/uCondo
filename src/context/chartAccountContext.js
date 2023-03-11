@@ -1,22 +1,29 @@
 import { createContext, useReducer } from "react";
 import chartAccounts from "../data/chartAccounts";
+import { storeChartAccounts } from "../storage/storage";
 
-const ChartAccountContext  = createContext({})
+const ChartAccountContext = createContext({})
 const initialState = { chartAccounts }
 
 const actions = {
     deleteChartAccount(state, id) {
+        const chartAccounts = state.chartAccounts.filter(item => item.id !== id)
+        storeChartAccounts(chartAccounts)
         return {
             ...state,
-            chartAccounts: state.chartAccounts.filter(item  => item.id !== id)
+            chartAccounts
         };
-    }, 
+    },
     createChartAccount(state, chartAccount) {
-        const chartAccounts = state.chartAccounts.filter(acc => acc.id !== chartAccount.id)
+        const chartAccounts = [...state.chartAccounts.filter(acc => acc.id !== chartAccount.id), chartAccount]
+        storeChartAccounts(chartAccounts)
         return {
             ...state,
-            chartAccounts: [...chartAccounts, chartAccount]
+            chartAccounts
         }
+    },
+    fetchChartAccounts(state, chartAccounts) {
+        return { ...state, chartAccounts }
     }
 }
 

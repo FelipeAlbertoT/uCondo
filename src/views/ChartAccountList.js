@@ -1,15 +1,25 @@
 import { Icon } from '@rneui/base';
 import { ListItem, Dialog, Input } from '@rneui/themed';
 import { useContext, useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import ChartAccountContext from '../context/chartAccountContext';
+import fetchChartAccounts from '../storage/storage';
 
 export default function ChartAccountList({ navigation }) {
+  const [chartAccounts, setChartAccounts] = useState([])
   const [showDialog, setShowDialog] = useState(false)
   const [accToDelete, setAccToDelete] = useState({})
 
   const { state, dispatch } = useContext(ChartAccountContext);
-  const [ chartAccounts, setChartAccounts ] = useState()
+
+  useEffect(() => {
+    fetchChartAccounts().then((fetchedChartAccounts) => {
+      dispatch({
+        type: 'fetchChartAccounts',
+        payload: fetchedChartAccounts
+      })
+    })
+  }, [])
 
   useEffect(() => {
     navigation.setOptions({
@@ -18,10 +28,11 @@ export default function ChartAccountList({ navigation }) {
   }, [navigation]);
 
   useEffect(() => {
-    setChartAccounts(state.chartAccounts.sort((a, b) => {
-      if (a.id < b.id) return -1;
-      if (a.id > b.id) return 1;
-    }))
+    if (state.chartAccounts)
+      setChartAccounts(state.chartAccounts.sort((a, b) => {
+        if (a.id < b.id) return -1;
+        if (a.id > b.id) return 1;
+      }))
   }, [state])
 
   const toggleConfirmation = (acc) => {
@@ -50,15 +61,15 @@ export default function ChartAccountList({ navigation }) {
   return (
     <View style={styles.mainContainer}>
       <Input
-          inputContainerStyle={styles.searchInput}
-          onChangeText={(value) => { setChartAccounts(state.chartAccounts.filter(acc => acc.name.toLowerCase().includes(value.toLowerCase())))}}
-          placeholder="Pesquisar conta"
-          leftIcon={<Icon style={{marginRight: 12}} name='search' type="feather" size={20} color='#C4C4D1' />}
-        />
+        inputContainerStyle={styles.searchInput}
+        onChangeText={(value) => { setChartAccounts(chartAccounts.filter(acc => acc.name.toLowerCase().includes(value.toLowerCase()))) }}
+        placeholder="Pesquisar conta"
+        leftIcon={<Icon style={{ marginRight: 12 }} name='search' type="feather" size={20} color='#C4C4D1' />}
+      />
       <View style={styles.innerContainer}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Listagem</Text>
-          <Text style={styles.headerCount}>{state.chartAccounts.length} registros</Text>
+          <Text style={styles.headerCount}>{chartAccounts.length} registros</Text>
         </View>
         <FlatList
           keyExtractor={acc => acc.id.toString()}
