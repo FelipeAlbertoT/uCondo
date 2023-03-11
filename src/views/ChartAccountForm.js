@@ -6,7 +6,7 @@ import ChartAccountContext from "../context/chartAccountContext";
 
 const defaultValues = { type: 1, allowEntry: 1 }
 
-export default function AddChartAccountScreen({ navigation, route }) {
+export default function ChartAccountForm({ navigation, route }) {
   const { state, dispatch } = useContext(ChartAccountContext);
   const [chartAccount, setChartAccount] = useState(route.params ? route.params : defaultValues)
 
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
   },
   fieldLabel: {
     color: '#6A6A6A',
+    fontFamily: 'rubik',
     fontSize: 15,
     fontWeight: 500,
     marginTop: 9
@@ -172,6 +173,9 @@ const styles = StyleSheet.create({
     marginTop: 2,
     paddingLeft: 17,
     color: '#777777',
+    fontFamily: 'rubik',
+    fontSize: 15,
+    fontWeight: '400',
   },
   pickerContainer: {
     backgroundColor: '#FFF',
