@@ -1,13 +1,11 @@
-import { registerRootComponent } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button, Icon } from '@rneui/themed';
 import { loadAsync } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
-import ChartAccountList from './views/ChartAccountList';
-import ChartAccountForm from './views/ChartAccountForm';
-import { ChartAccountProvider } from './context/chartAccountContext';
+import ChartAccountFormContainer from './screens/ChartAccountForm/ChartAccountFormContainer';
+import { ChartAccountProvider } from './context/provider';
+import ChartAccountListContainer from './screens/ChartAccountList/ChartAccountListContainer';
 
 const roboto = require('../assets/fonts/Roboto-Regular.ttf');
 const robotoBold = require('../assets/fonts/Roboto-Bold.ttf');
@@ -29,15 +27,7 @@ const screenOptions = {
   },
 };
 
-function AddButton({ navigate }) {
-  return (
-    <Button type="clear" onPress={() => navigate('ChartAccountForm')}>
-      <Icon name="add" size={26} color="white" />
-    </Button>
-  );
-}
-
-function App() {
+export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
@@ -77,15 +67,14 @@ function App() {
         >
           <Stack.Screen
             name="ChartAccountList"
-            component={ChartAccountList}
-            options={({ navigation }) => ({
+            component={ChartAccountListContainer}
+            options={() => ({
               title: 'Plano de contas',
-              headerRight: () => AddButton(navigation),
             })}
           />
           <Stack.Screen
             name="ChartAccountForm"
-            component={ChartAccountForm}
+            component={ChartAccountFormContainer}
             options={{
               title: 'Inserir Conta',
             }}
@@ -95,5 +84,3 @@ function App() {
     </ChartAccountProvider>
   );
 }
-
-registerRootComponent(App);
