@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import ChartAccountContext from '../../context/provider';
+import { ACTION_TYPE } from '../../utils/constants';
 import ChartAccountFormView from './ChartAccountFormView';
 import SaveButton from './components/SaveButton';
 
@@ -24,7 +25,7 @@ function ChartAccountFormContainer({ navigation, route }) {
     }
     if (chartAccount.id && chartAccount.name) {
       dispatch({
-        type: 'createChartAccount',
+        type: ACTION_TYPE.CREATE,
         payload: { chartAccount, newParentChartAccounts },
       });
       navigation.goBack();

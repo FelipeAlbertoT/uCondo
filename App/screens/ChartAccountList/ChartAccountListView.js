@@ -1,5 +1,6 @@
 import { Icon, Input } from '@rneui/themed';
 import { FlatList, Text, View } from 'react-native';
+import { ROUTE } from '../../utils/constants';
 import ItemList from './components/ItemList';
 import styles from './style';
 
@@ -12,7 +13,7 @@ function ChartAccountListView({
   const itemListComponent = ({ item }) => (
     <ItemList
       item={item}
-      onPress={() => navigation.navigate('ChartAccountForm', item)}
+      onPress={() => navigation.navigate(ROUTE.FORM, item)}
       onDeletePress={() => toggleConfirmation(item)}
     />
   );

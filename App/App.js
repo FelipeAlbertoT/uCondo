@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import ChartAccountFormContainer from './screens/ChartAccountForm/ChartAccountFormContainer';
 import { ChartAccountProvider } from './context/provider';
 import ChartAccountListContainer from './screens/ChartAccountList/ChartAccountListContainer';
+import { ROUTE } from './utils/constants';
+import colors from './styles/colors';
 
 const roboto = require('../assets/fonts/Roboto-Regular.ttf');
 const robotoBold = require('../assets/fonts/Roboto-Bold.ttf');
@@ -17,9 +19,9 @@ SplashScreen.preventAutoHideAsync();
 
 const screenOptions = {
   headerStyle: {
-    backgroundColor: '#622490',
+    backgroundColor: colors.primary,
   },
-  headerTintColor: '#FFF',
+  headerTintColor: colors.white,
   headerTitleStyle: {
     fontFamily: 'roboto-bold',
     fontWeight: '700',
@@ -62,18 +64,18 @@ export default function App() {
     <ChartAccountProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="ChartAccountList"
+          initialRouteName={ROUTE.LIST}
           screenOptions={screenOptions}
         >
           <Stack.Screen
-            name="ChartAccountList"
+            name={ROUTE.LIST}
             component={ChartAccountListContainer}
             options={() => ({
               title: 'Plano de contas',
             })}
           />
           <Stack.Screen
-            name="ChartAccountForm"
+            name={ROUTE.FORM}
             component={ChartAccountFormContainer}
             options={{
               title: 'Inserir Conta',

@@ -1,19 +1,20 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#622490',
+    backgroundColor: colors.primary,
   },
   innerContainer: {
     flex: 1,
-    backgroundColor: '#F0EDF5',
+    backgroundColor: colors.gray1,
     justifyContent: 'center',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
   },
   searchInput: {
-    backgroundColor: '#FFF',
+    backgroundColor: colors.white,
     borderRadius: 100,
     marginHorizontal: 20,
     marginBottom: 10,
@@ -31,13 +32,13 @@ const styles = StyleSheet.create({
     marginVertical: 21,
   },
   headerTitle: {
-    color: '#3D3D4C',
+    color: colors.gray4,
     fontFamily: 'rubik',
     fontSize: 20,
     fontWeight: 400,
   },
   headerCount: {
-    color: '#A0A0B2',
+    color: colors.gray5,
     fontFamily: 'roboto',
     fontSize: 15,
     fontWeight: 400,
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     marginRight: 24,
     marginBottom: 13,
     borderRadius: 16,
-    backgroundColor: '#FFF',
+    backgroundColor: colors.white,
   },
   listContent: {
     flex: 1,
@@ -58,13 +59,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   listTitleIncome: {
-    color: '#1BA803',
+    color: colors.positive,
   },
   listTitleExpense: {
-    color: '#E28856',
+    color: colors.negative,
   },
   dialog: {
-    backgroundColor: '#FFF',
+    backgroundColor: colors.white,
     borderRadius: 16,
   },
   dialogText: {
@@ -77,15 +78,15 @@ const styles = StyleSheet.create({
     fontWeight: 700,
   },
   btnPos: {
-    color: '#FFF',
-    backgroundColor: '#FF6680',
+    color: colors.white,
+    backgroundColor: colors.error,
     borderRadius: 100,
     paddingHorizontal: 12,
     fontSize: 15,
     fontWeight: 400,
   },
   btnNeg: {
-    color: '#FF6680',
+    color: colors.error,
     fontSize: 15,
     fontWeight: 400,
   },

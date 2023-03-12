@@ -1,42 +1,43 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#622490',
+    backgroundColor: colors.primary,
     justifyContent: 'center',
   },
   content: {
     flex: 1,
-    backgroundColor: '#F0EDF5',
+    backgroundColor: colors.gray1,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     padding: 23,
   },
   fieldLabel: {
-    color: '#6A6A6A',
+    color: colors.gray3,
     fontFamily: 'rubik',
     fontSize: 15,
     fontWeight: 500,
     marginTop: 9,
   },
   textInput: {
-    backgroundColor: '#FFF',
+    backgroundColor: colors.white,
     borderRadius: 10,
     height: 43,
     marginTop: 2,
     paddingLeft: 17,
-    color: '#777777',
+    color: colors.gray2,
     fontFamily: 'rubik',
     fontSize: 15,
     fontWeight: '400',
   },
   textInputError: {
     borderWidth: 1,
-    borderColor: '#FF6680',
+    borderColor: colors.error,
   },
   pickerContainer: {
-    backgroundColor: '#FFF',
+    backgroundColor: colors.white,
     borderRadius: 10,
     height: 43,
     marginTop: 2,
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     marginTop: -6,
-    color: '#777777',
+    color: colors.gray2,
   },
 });
 

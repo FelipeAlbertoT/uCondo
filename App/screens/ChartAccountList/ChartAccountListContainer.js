@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import ChartAccountContext from '../../context/provider';
 import fetchChartAccounts from '../../context/store';
+import { ACTION_TYPE, ROUTE } from '../../utils/constants';
 import ChartAccountListView from './ChartAccountListView';
 import AddButton from './components/AddButton';
 import ConfirmationModal from './components/ConfirmationModal';
@@ -16,7 +17,7 @@ function ChartAccountListContainer({ navigation }) {
   useEffect(() => {
     fetchChartAccounts().then((fetchedChartAccounts) => {
       dispatch({
-        type: 'fetchChartAccounts',
+        type: ACTION_TYPE.FETCH,
         payload: fetchedChartAccounts,
       });
     });
@@ -24,8 +25,7 @@ function ChartAccountListContainer({ navigation }) {
 
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () =>
-        AddButton(() => navigation.navigate('ChartAccountForm')),
+      headerRight: () => AddButton(() => navigation.navigate(ROUTE.FORM)),
     });
   }, [navigation]);
 
@@ -55,7 +55,7 @@ function ChartAccountListContainer({ navigation }) {
   const deleteChartAccount = () => {
     toggleConfirmation({});
     dispatch({
-      type: 'deleteChartAccount',
+      type: ACTION_TYPE.DELETE,
       payload: accToDelete.id,
     });
   };
