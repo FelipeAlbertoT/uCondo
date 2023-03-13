@@ -1,5 +1,6 @@
 import { Dialog, Icon } from '@rneui/themed';
 import { Text, View } from 'react-native';
+import PropTypes from 'prop-types';
 import styles from '../style';
 
 function ConfirmationModal({
@@ -48,5 +49,12 @@ function ConfirmationModal({
     </Dialog>
   );
 }
+
+ConfirmationModal.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  toggleConfirmation: PropTypes.func.isRequired,
+  itemToDelete: PropTypes.objectOf(PropTypes.object()).isRequired,
+  onConfirm: PropTypes.func.isRequired,
+};
 
 export default ConfirmationModal;

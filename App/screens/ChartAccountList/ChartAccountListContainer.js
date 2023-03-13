@@ -23,9 +23,13 @@ function ChartAccountListContainer({ navigation }) {
     });
   }, []);
 
+  const addButton = () => (
+    <AddButton onPress={() => navigation.navigate(ROUTE.FORM)} />
+  );
+
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => AddButton(() => navigation.navigate(ROUTE.FORM)),
+      headerRight: addButton,
     });
   }, [navigation]);
 
