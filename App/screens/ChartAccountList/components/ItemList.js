@@ -1,5 +1,4 @@
 import { Icon, ListItem } from '@rneui/themed';
-import PropTypes from 'prop-types';
 import styles from '../style';
 
 function ItemList({ item, onPress, onDeletePress }) {
@@ -26,11 +25,5 @@ function ItemList({ item, onPress, onDeletePress }) {
     </ListItem>
   );
 }
-
-ItemList.propTypes = {
-  item: PropTypes.objectOf(PropTypes.object()).isRequired,
-  onPress: PropTypes.func.isRequired,
-  onDeletePress: PropTypes.func.isRequired,
-};
 
 export default ItemList;

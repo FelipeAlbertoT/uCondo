@@ -1,5 +1,4 @@
 import { Button, Icon } from '@rneui/themed';
-import { PropTypes } from 'prop-types';
 
 export default function SaveButton({ saveChartAccount }) {
   return (
@@ -8,7 +7,3 @@ export default function SaveButton({ saveChartAccount }) {
     </Button>
   );
 }
-
-SaveButton.propTypes = {
-  saveChartAccount: PropTypes.func.isRequired,
-};

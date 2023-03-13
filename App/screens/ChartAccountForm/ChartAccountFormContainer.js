@@ -68,23 +68,21 @@ function ChartAccountFormContainer({ navigation, route }) {
       if (parentMaxChild > intId && parent.parentAcc !== '') {
         return {
           parent: parent.id,
-          id: `${parent.parentAcc}.${parentMaxChild}.${
-            findMaxChildId(`${parent.parentAcc}.${parentMaxChild}`) + 1
-          }`,
+          id: `${parent.parentAcc}.${parentMaxChild + 1}`,
         };
       }
       const { id: newParentId } = generateId(parent.parentAcc);
-      const newParent = {
-        ...parent,
-        id: newParentId,
-        name: `${parent.name}(AUTO)`,
-      };
-      setNewParentChartAccounts([...newParentChartAccounts, newParent]);
+      // const newParent = {
+      //   ...parent,
+      //   id: newParentId,
+      //   name: `${parent.name}(AUTO)`,
+      // };
+      // setNewParentChartAccounts([...newParentChartAccounts, newParent]);
 
-      const newParentIdStr = newParentId !== '' ? `${newParentId}.` : '';
+      // const newParentIdStr = newParentId !== '' ? `${newParentId}.` : '';
       return {
-        parent: newParentId,
-        id: newParentIdStr + (findMaxChildId(newParentId) + 1),
+        parent: parent.parentAcc,
+        id: newParentId, // newParentIdStr + (findMaxChildId(newParentId) + 1),
       };
     }
     if (id === '') return { parent: id, id: maxChildId + 1 };
@@ -119,10 +117,10 @@ function ChartAccountFormContainer({ navigation, route }) {
     <ChartAccountFormView
       chartAccount={chartAccount}
       parentsData={[...state.chartAccounts, ...newParentChartAccounts].filter(
-        (item) => item.allowEntry !== '1'
+        (item) => item.allowEntry !== 1
       )}
-      showIdError={showIdError}
-      showNameError={showNameError}
+      idError={showIdError}
+      nameError={showNameError}
       onChangeParent={onChangeParent}
       onChangeId={onChangeId}
       onChangeName={onChangeName}
